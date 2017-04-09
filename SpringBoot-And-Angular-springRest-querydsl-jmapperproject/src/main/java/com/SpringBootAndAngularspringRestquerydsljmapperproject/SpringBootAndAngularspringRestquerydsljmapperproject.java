@@ -1,4 +1,4 @@
-package com.elsewedy;
+package com.SpringBootAndAngularspringRestquerydsljmapperproject;
 
 import javax.sql.DataSource;
 
@@ -14,15 +14,15 @@ import org.springframework.context.annotation.Primary;
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.elsewedy" })
 //@PropertySource("application.properties")
-public class ElsewedyProjectApplication extends SpringBootServletInitializer{
+public class SpringBootAndAngularspringRestquerydsljmapperproject extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication.run(ElsewedyProjectApplication.class, args);
+		SpringApplication.run(SpringBootAndAngularspringRestquerydsljmapperproject.class, args);
 	}
 	
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ElsewedyProjectApplication.class);
+        return application.sources(SpringBootAndAngularspringRestquerydsljmapperproject.class);
     }
 	
 	

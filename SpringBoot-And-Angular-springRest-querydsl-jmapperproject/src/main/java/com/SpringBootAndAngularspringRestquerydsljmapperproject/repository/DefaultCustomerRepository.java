@@ -7,9 +7,9 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.SpringBootAndAngularspringRestquerydsljmapperproject.repository.entities.QCustomer;
 import com.elsewedy.common.SearchCriteria;
 import com.elsewedy.repository.entities.Customer;
-import com.elsewedy.repository.entities.QCustomer;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.jpa.impl.JPAQuery;
