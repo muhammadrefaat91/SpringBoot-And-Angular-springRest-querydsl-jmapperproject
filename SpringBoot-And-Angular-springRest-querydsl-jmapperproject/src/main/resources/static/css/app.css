@@ -1,0 +1,43 @@
+ .username.ng-valid {
+          background-color: lightgreen;
+      }
+      .username.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .username.ng-dirty.ng-invalid-minlength {
+          background-color: yellow;
+      }
+ 
+      .email.ng-valid {
+          background-color: lightgreen;
+      }
+      .email.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .email.ng-dirty.ng-invalid-email {
+          background-color: yellow;
+      }
+      
+.row {
+    margin-right: 18px;
+    margin-left: 34px;
+    margin-top: 9px;
+}
+
+.panel-default {
+    border-color: #ddd;
+    margin: 16px;
+}
+ 
+ .ng-invalid.ng-dirty{
+ 	border-color:#fa787e;
+ }
+ .ng-valid.ng-dirty{
+ 	border-color:#87F89;
+ }
+ input.ng-invalid {
+    background-color:pink;
+}
+input.ng-valid {
+    background-color:lightgreen;
+}

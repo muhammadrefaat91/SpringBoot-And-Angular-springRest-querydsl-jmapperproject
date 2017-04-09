@@ -1,0 +1,178 @@
+<html ng-app="customerModule" >
+  <head>   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <link href="css/app.css" rel="stylesheet"></link>
+    <title>Customer Management</title>  
+
+  </head>
+  <body  ng-controller="AddCustomerController as addCustomerCtrl">
+      <div class="generic-container"  >
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">Customer Management Form </span></div>
+              <div class="formcontainer">
+                  <form name="customerForm"  id="customerFormId" class="form-horizontal" 
+                  		ng-submit="customerForm.$valid && addCustomerCtrl.submit()" novalidate>
+                  
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="firstName">First Name:</label>
+                              <div class="col-md-7">
+                                  <input type="text" name="firstName"  ng-model="firstName"
+                                   class="  form-control input-sm ng-pristine ng-invalid ng-untouched" placeholder="Enter your first name" ng-maxlength="50" required />
+                                 <span  style="color: red;" ng-show="customerForm.firstName.$dirty && customerForm.firstName.$invalid">
+                                      <span ng-show="customerForm.firstName.$error.required">This is a required field</span>
+                                      <span ng-if="!customerForm.firstName.$error.required && customerForm.firstName.$invalid" >The value is too long</span>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="lastName">Last Name:</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="lastName"  name="lastName" class="  form-control input-sm ng-pristine ng-invalid"
+                                   placeholder="Enter your Last name" required ng-maxlength="50"/>
+                                  <span  style="color: red;" ng-show="customerForm.lastName.$dirty && customerForm.lastName.$invalid">
+                                      <span  ng-show="customerForm.lastName.$error.required">This is a required field</span>
+ 									  <span ng-if="!customerForm.lastName.$error.required && !customerForm.lastName.$valid" >The value is too long</span>
+                                   </span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="mobileNumber">Mobile Number:</label>
+                              <div class="col-md-7">
+                                  <input type="number" name="mobileNumber" ng-model="mobileNumber" ng-pattern="/^[0-9]{10,10}$/;" class="form-control input-sm ng-pristine ng-invalid" 
+                                  placeholder="Enter your mobile number" required ng-maxlength="11" ng-minlength="11" />
+                                   <span  style="color: red;" ng-show="customerForm.mobileNumber.$dirty && customerForm.mobileNumber.$invalid" >
+	                                     <span  ng-show="customerForm.mobileNumber.$error.required">This field is required</span>
+	                                     <span ng-show="(customerForm.mobileNumber.$error.minlength ||
+	                                      customerForm.mobileNumber.$error.maxlength) " >phone number should be 11 digits</span>
+							       </span>
+                              </div>
+                          </div>
+                      </div>
+                       
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="address">Address</label>
+                              <div class="col-md-7">
+                                  <input type="text"  name="address" ng-model="address" class="form-control input-sm ng-pristine ng-invalid" placeholder="Enter your Address." ng-maxlength="100" required/>  
+									<span  style="color: red;" ng-show="customerForm.address.$dirty && customerForm.address.$invalid">
+                                      <span ng-show="customerForm.address.$error.required">This is a required field</span>
+                                      <span ng-if="!customerForm.address.$error.required && !customerForm.address.$valid" >The value is too long</span>
+<!--                                       <span  >This field is invalid </span> -->
+                                  	</span>                                                   
+                              </div>
+                          </div>
+                      </div>
+ 
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="email">Email</label>
+                              <div class="col-md-7">
+                                  <input type="email" name="email" ng-model="email" class="form-control input-sm ng-pristine"
+                                   placeholder="Enter your Email" ng-maxlength="50" required />
+                                  <div class="has-error"  >
+                                      <span style="color:red" ng-show="customerForm.email.$dirty && customerForm.email.$invalid">
+											<span ng-show="customerForm.email.$error.required">Email is required.</span>
+											<span ng-if="!customerForm.email.$error.email && !customerForm.email.$error.required && customerForm.email.$invalid" >The value is too long</span>
+											<span ng-show="customerForm.email.$error.email">Invalid email address.</span>
+									  </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <span style="color:red;" ng-show="errorMessage.length != 0">{{errorMessage}}</span>
+                      <span style="color:green;">{{successMessage}}</span>
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit" class="btn btn-primary btn-sm"  value="{{!id ? 'Add' : 'Update'}}" ng-disabled="customerForm.$invalid"/>
+                              <button type="reset" class="btn btn-warning btn-sm">Reset Form</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="panel panel-default">
+          <div class="panel-heading"><span class="lead">Search Customers </span></div>
+                <!-- Default panel contents -->
+                  <form name="searchCustomerForm" ng-controller="searchCustomerController as searchCtrl"  id="searchCustomerFormId" class="form-horizontal" 
+                  		ng-submit="searchforCustomers()">
+	                	<div class="row">
+	                          <div class="form-group col-md-5">
+	                              <label class="col-md-3 control-lable" for="firstName">First Name:</label>
+	                              <div class="col-md-7">
+	                                  <input type="text" name="firstName"  ng-model="sfirstName"
+	                                   class="  form-control input-sm" placeholder="first name"  />
+	                              </div>
+	                          </div>
+	                          <div class="form-group col-md-5">
+	                              <label class="col-md-2 control-lable" for="lastName">Last Name:</label>
+	                              <div class="col-md-7">
+	                                  <input type="text" name="lastName"  ng-model="slastName"
+	                                   class="  form-control input-sm" placeholder="Last name" />
+	                              </div>
+	                          </div>
+	                          <div class="form-group col-md-5">
+	                              <label class="col-md-3 control-lable" for="mobileNumber">Mobile Number:</label>
+	                              <div class="col-md-7">
+	                                  <input type="text" name="mobileNumber"  ng-model="smobileNumber"
+	                                   class="  form-control input-sm" placeholder="Mobile Number" />
+	                              </div>
+	                          </div>
+	                          <div class="form-group col-md-5">
+	                              <label class="col-md-2 control-lable" for="email">Email:</label>
+	                              <div class="col-md-7">
+	                                  <input type="text" name="email"  ng-model="semail"
+	                                   class="  form-control input-sm" placeholder="email" />
+	                              </div>
+	                          </div>
+	                    </div>
+	                     <div class="row">
+                          <div class="form-actions floatRight  ">
+                              <input type="submit" class="btn btn-primary "  value="search" ng-disabled="searchCustomerForm.$invalid"/>
+                          	  <button type="reset" class="btn btn-warning btn-sm">Reset Form</button>
+                          	  
+                          </div>
+                      </div>
+                  
+              
+              <div class="tablecontainer">
+                  <table class="table table-hover" >
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>MobileNumber</th>
+								<th>Address</th>
+                              <th>Email</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="customer in customers">
+                              <td><span ng-bind="customer.id"></span></td>
+                              <td><span ng-bind="customer.firstName"></span></td>
+                              <td><span ng-bind="customer.lastName"></span></td>
+                              <td><span ng-bind="customer.mobileNumber"></span></td>
+                              <td><span ng-bind="customer.address"></span></td>
+                              <td><span ng-bind="customer.email"></span></td>
+                              <td>
+                              <button id="edit" type="button" ng-click="addCustomerCtrl.find(customer.id)" class="btn btn-success custom-width">Edit</button> 
+                               <button type="button" ng-click="deleteCustomer($index,customer.id)" class="btn btn-danger custom-width">Remove</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              </form>
+          </div>
+      </div>
+             
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script type="text/javascript" src="js/controller.js"></script> 
+  </body>
+</html>
