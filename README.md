@@ -1,0 +1,2 @@
+# SpringBoot-And-Angular-springRest-querydsl-jmapperproject
+Spring Boot, Angular JS, (CRUD Examples using $http angular service) spring rest, querydsl, jmapper working together. shows integrating AngularJS with Spring MVC 4. We will create a CRUD application using Spring REST API on back-end and AngularJS encapsulated within plain html on front-end, communicating asynchronously with server using $http service. We will also perform all sorts of validation on UI using AngularJS Form
